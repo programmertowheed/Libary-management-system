@@ -1,0 +1,89 @@
+.card-header.py-3 h6.m-0.font-weight-bold.text-primary.d-inline-block {
+    line-height: 31px !important;
+}
+footer.sticky-footer {
+    margin-top: 50px;
+}
+
+.table a.btn.pd0{
+    padding: 4px 8px !important;
+}
+
+.table .fa, .table .fas {
+    color: #fff !important;
+}
+
+.form-group .form-check-inline {
+    padding-left: 20px;
+}
+.form-group .form-check-inline .form-check-label {
+    margin-left: 15px;
+}
+#msg {
+    margin: 8px 0 0 10px;
+    /* font-weight: 600; */
+}
+span#status {
+    color: green;
+}
+
+span#error {
+    color: red;
+}
+
+.profilepic {
+    width: 200px;
+    margin: 0 auto;
+}
+img.img-profile.img-fluid.img-thumbnail.img-pointer{
+    cursor: pointer;
+}
+.innerdiv {
+    border: 1px solid #d6671f;
+    padding: 30px;
+    background: #b9cdda4a;
+}
+.outerdiv {
+    width: 45% !important;
+    margin: 0 auto;
+}
+.text-center.mt-4.mb-4 h1.h3.mb-0.text-gray-800 {
+    color: #333 !important;
+}
+.innerdiv .form-group label {
+    color: #000;
+    font-size: 17px;
+    font-weight: 500;
+}
+span.requerd {
+    color: red;
+}
+span.mr-2.d-none.d-lg-inline.text-gray-600.small {
+    font-size: 18px;
+}
+
+.sidebar .nav-item .nav-link .img-profile, .topbar .nav-item .nav-link .img-profile {
+    height: 3rem;
+    width: 3rem;
+}
+.rotate-n-15 {
+    transform: none;
+}
+
+@media only screen and (max-width: 992px){
+    .outerdiv {
+        width: 50% !important;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .outerdiv {
+        width: 60% !important;
+    }
+}
+
+@media only screen and (max-width: 560px){
+    .outerdiv {
+        width: 90% !important;
+    }
+}
