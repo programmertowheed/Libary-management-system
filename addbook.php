@@ -40,16 +40,22 @@
                         if(empty($name) || empty($department_id) || empty($author_id) || empty($total_book) || empty($publication_status)){
                             header("Location:addbook.php?err=Feild must not be empty!!");
                         }else{    
-
-                            $insert ="INSERT INTO  tbl_book (name,department_id,author_id,total_book,in_stock,publication_status,date)
-                                VALUES ('$name','$department_id','$author_id','$total_book','$total_book','$publication_status','$date')";
-                            $run = $db->insert($insert);
-                            if($run== true){
-                                header("Location:addbook.php?msg=Book added successfully!!");
-                                
+                            $exquery = "SELECT * FROM tbl_book WHERE name='$name' ";
+                            $exname = $db->select($exquery);
+                            if($exname != false){
+                                header("Location:addbook.php?err=Book already exist!!");
                             }else{
-                                header("Location:addbook.php?err=Book not added!!");
+                                $insert ="INSERT INTO  tbl_book (name,department_id,author_id,total_book,in_stock,publication_status,date)
+                                    VALUES ('$name','$department_id','$author_id','$total_book','$total_book','$publication_status','$date')";
+                                $run = $db->insert($insert);
+                                if($run== true){
+                                    header("Location:addbook.php?msg=Book added successfully!!");
+                                    
+                                }else{
+                                    header("Location:addbook.php?err=Book not added!!");
+                                }
                             }
+                                
                         }
 
                     }

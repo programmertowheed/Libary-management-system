@@ -37,17 +37,21 @@
                         if(empty($name) || empty($publication_status)){
                             header("Location:adddepartment.php?err=Feild must not be empty!!");
                         }else{    
-
-                            $insert ="INSERT INTO  tbl_department (name,publication_status,date)
-                                VALUES ('$name','$publication_status','$date')";
-                            $run = $db->insert($insert);
-                            if($run== true){
-                                header("Location:adddepartment.php?msg=Department added successfully!!");
+                            $exquery = "SELECT * FROM tbl_department WHERE name='$name' ";
+                            $exname = $db->select($exquery);
+                            if($exname != false){
+                                header("Location:adddepartment.php?err=Department already exist!!");
                             }else{
-                                header("Location:adddepartment.php?err=Department not added!!");
+                               $insert ="INSERT INTO  tbl_department (name,publication_status,date)
+                                VALUES ('$name','$publication_status','$date')";
+                                $run = $db->insert($insert);
+                                if($run== true){
+                                    header("Location:adddepartment.php?msg=Department added successfully!!");
+                                }else{
+                                    header("Location:adddepartment.php?err=Department not added!!");
+                                }
                             }
                         }
-
                     }
                 ?>
           <!-- Content Row -->

@@ -31,7 +31,7 @@
             <?php 
                 if(isset($_REQUEST['submit']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
                         $name                = $fm->validation($_POST['name']);
-                        $department_id          = $fm->validation($_POST['department_id']);
+                        $department_id       = $fm->validation($_POST['department_id']);
                         $studentid           = $fm->validation($_POST['studentid']);
                         $phone               = $fm->validation($_POST['phone']);
                         $publication_status  = $fm->validation($_POST['publication_status']);
@@ -40,15 +40,20 @@
                         if(empty($name) || empty($department_id) || empty($studentid) || empty($phone) || empty($publication_status)){
                             header("Location:addstudent.php?err=Feild must not be empty!!");
                         }else{    
-
-                            $insert ="INSERT INTO  tbl_student (name,department_id,studentid,phone,publication_status,date)
-                                VALUES ('$name','$department_id','$studentid','$phone','$publication_status','$date')";
-                            $run = $db->insert($insert);
-                            if($run== true){
-                                header("Location:addstudent.php?msg=Student added successfully!!");
-                                
+                            $exquery = "SELECT * FROM tbl_student WHERE studentid='$studentid' ";
+                            $exuser = $db->select($exquery);
+                            if($exuser != false){
+                                header("Location:addstudent.php?err=Student ID already exist!!");
                             }else{
-                                header("Location:addstudent.php?err=Student not added!!");
+                                $insert ="INSERT INTO  tbl_student (name,department_id,studentid,phone,publication_status,date)
+                                VALUES ('$name','$department_id','$studentid','$phone','$publication_status','$date')";
+                                $run = $db->insert($insert);
+                                if($run== true){
+                                    header("Location:addstudent.php?msg=Student added successfully!!");
+                                    
+                                }else{
+                                    header("Location:addstudent.php?err=Student not added!!");
+                                }
                             }
                         }
 

@@ -18,8 +18,8 @@
             $username  = $fm->validation($_POST['username']);
             $mobile    = $fm->validation($_POST['mobile']);
 
-			$email = Session::get("email");
-			$id    = Session::get("userId");
+			$email = Session::get("libraryemail");
+			$id    = Session::get("libraryuserId");
 
             if(empty($username) || empty($mobile)){
                 header("Location:../editprofile.php?err=Feild must not be empty!!");

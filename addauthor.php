@@ -37,16 +37,21 @@
                         if(empty($name) || empty($publication_status)){
                             header("Location:addauthor.php?err=Feild must not be empty!!");
                         }else{    
-
-                            $insert ="INSERT INTO  tbl_author (name,publication_status,date)
-                                VALUES ('$name','$publication_status','$date')";
-                            $run = $db->insert($insert);
-                            if($run== true){
-                                header("Location:adddepartment.php?msg=Author added successfully!!");
-                                
+                            $exquery = "SELECT * FROM tbl_author WHERE name='$name' ";
+                            $exname = $db->select($exquery);
+                            if($exname != false){
+                                header("Location:addauthor.php?err=Author already exist!!");
                             }else{
-                                header("Location:adddepartment.php?err=Author not added!!");
-                            }
+                                $insert ="INSERT INTO  tbl_author (name,publication_status,date)
+                                    VALUES ('$name','$publication_status','$date')";
+                                $run = $db->insert($insert);
+                                if($run== true){
+                                    header("Location:addauthor.php?msg=Author added successfully!!");
+                                    
+                                }else{
+                                    header("Location:addauthor.php?err=Author not added!!");
+                                }
+                            }    
                         }
 
                     }

@@ -15,8 +15,8 @@
 <?php 
 	 
     if(isset($_REQUEST['imgsubmit'])){
-			$email = Session::get("email");
-			$id    = Session::get("userId");
+			$email = Session::get("libraryemail");
+			$id    = Session::get("libraryuserId");
 			$permited = array('jpg','jpeg','png','gif');
 			$file_name  =$_FILES['adminimage']['name'];
 			$file_size  =$_FILES['adminimage']['size'];

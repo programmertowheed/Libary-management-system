@@ -37,24 +37,31 @@
                         $date               = $current_time;
 
                         if(empty($student_id) || empty($department_id) || empty($book_id) || empty($return_date)){
-                            header("Location:addbook.php?err=Feild must not be empty!!");
-                        }else{    
-                            $bupdate ="UPDATE tbl_book 
-                                    SET
-                                    in_stock = in_stock-1
-                                    WHERE id = '$book_id'
-                                    ";
-                            $brun = $db->update($bupdate);
-                            if($brun== true){
-                                $insert ="INSERT INTO  tbl_issuebook (student_id,department_id,book_id,return_date,date)
-                                    VALUES ('$student_id','$department_id','$book_id','$return_date','$date')";
-                                $run = $db->insert($insert);
-                                if($run== true){
-                                    header("Location:addbook.php?msg=Book issued successfully!!");
-                                }else{
-                                    header("Location:addbook.php?err=Book not issued!!");
+                            header("Location:addissuebook.php?err=Feild must not be empty!!");
+                        }else{ 
+                            $exquery = "SELECT * FROM tbl_issuebook WHERE student_id='$student_id' AND book_id='$book_id'";
+                            $exbook = $db->select($exquery);
+                            if($exbook != false){
+                                header("Location:addissuebook.php?err=Book already issued!!");
+                            }else{
+                                $bupdate ="UPDATE tbl_book 
+                                        SET
+                                        in_stock = in_stock-1
+                                        WHERE id = '$book_id'
+                                        ";
+                                $brun = $db->update($bupdate);
+                                if($brun== true){
+                                    $insert ="INSERT INTO  tbl_issuebook (student_id,department_id,book_id,return_date,date)
+                                        VALUES ('$student_id','$department_id','$book_id','$return_date','$date')";
+                                    $run = $db->insert($insert);
+                                    if($run== true){
+                                        header("Location:addissuebook.php?msg=Book issued successfully!!");
+                                    }else{
+                                        header("Location:addissuebook.php?err=Book not issued!!");
+                                    }
                                 }
-                            }
+                            }   
+                                
                         }
 
                     }

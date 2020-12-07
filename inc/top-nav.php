@@ -12,7 +12,7 @@
       <!-- Nav Item - Alerts -->
       <!-- <div class="topbar-divider d-none d-sm-block"></div> -->
  <?php
-    $id = Session::get("userId");
+    $id = Session::get("libraryuserId");
     $userquery = "SELECT * FROM tbl_user WHERE id ='$id'";
     $userred = $db->select($userquery);
     while($userres = mysqli_fetch_assoc($userred)){

@@ -24,22 +24,35 @@
 
             if(empty($id) || empty($name) || empty($department_id) || empty($studentid) || empty($phone) || empty($publication_status)){
                 header("Location:../editstudent.php?id=$id&err=Feild must not be empty!!");
-            }else{    
-				$update ="UPDATE tbl_student 
-						SET
-						name               = '$name',
-						department_id      = '$department_id',
-						studentid          = '$studentid',
-						phone              = '$phone',
-						publication_status = '$publication_status'
-						WHERE id = '$id'
-						";
-				$run = $db->update($update);
-				if($run== true){
-					header("Location:../studentlist.php?msg=Data updated successfully!!");
-				}else{
-					header("Location:../studentlist.php?err=Data not updated!!");
-				}
+            }else{ 
+            	$exquery = "SELECT * FROM tbl_student WHERE studentid='$studentid' ";
+                $exuser = $db->select($exquery);
+                if($exuser != false){
+                	while($res = mysqli_fetch_assoc($exuser)){
+					    $exid  = $res['id'] ;
+					}
+                }
+
+                if(isset($exid) && $exid != $id){
+            		header("Location:../editstudent.php?id=$id&err=Student ID already exist!!");
+                }else{
+                	$update ="UPDATE tbl_student 
+							SET
+							name               = '$name',
+							department_id      = '$department_id',
+							studentid          = '$studentid',
+							phone              = '$phone',
+							publication_status = '$publication_status'
+							WHERE id = '$id'
+							";
+					$run = $db->update($update);
+					if($run== true){
+						header("Location:../studentlist.php?msg=Data updated successfully!!");
+					}else{
+						header("Location:../studentlist.php?err=Data not updated!!");
+					}
+                }   
+					
             }
 
         }

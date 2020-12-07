@@ -22,28 +22,32 @@ class Session{
 	
 	public static function checkSession(){
 		self::init();
-		if(self::get("login")==false){
+		if(self::get("librarylogin")==false){
 			self::destroy();
 		}
 	}
 
 	public static function checkLogin(){
-		if(self::get("login")==true){
+		if(self::get("librarylogin")==true){
 			//header("Location:index.php");
 			header("Location:./../index.php");
 		}
 	}
 
 	public static function checkLoginresetpass(){
-		if(self::get("login")==true){
+		if(self::get("librarylogin")==true){
 			header("Location:./../index.php");
 		}
 	}
 	
 	public static function destroy(){
-		session_destroy();
+		//session_destroy();
 		//header("Location:login.php");
+		unset($_SESSION['librarylogin']);
+		unset($_SESSION['libraryemail']);
+		unset($_SESSION['libraryuserId']);
 		header("Location:showbook.php");
+		exit();
 	}
 
 	

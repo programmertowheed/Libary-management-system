@@ -180,9 +180,9 @@ if(isset($_COOKIE['email'])){
 										$value = mysqli_fetch_array($result);
 										$row   = mysqli_num_rows($result);
 										if($row > 0){
-											Session::set("login", true);
-											Session::set("email", $value['userEmail']);
-											Session::set("userId", $value['id']);
+											Session::set("librarylogin", true);
+											Session::set("libraryemail", $value['userEmail']);
+											Session::set("libraryuserId", $value['id']);
 											setcookie("email","",time()-(86400*7));
 											header("Location:../index.php");
 										}else{

@@ -21,18 +21,30 @@
 
             if(empty($id) || empty($name) || empty($publication_status)){
                 header("Location:../editauthor.php?id=$id&err=Feild must not be empty!!");
-            }else{    
-				$update ="UPDATE tbl_author 
-						SET
-						name               = '$name',
-						publication_status = '$publication_status'
-						WHERE id = '$id'
-						";
-				$run = $db->update($update);
-				if($run== true){
-					header("Location:../authorlist.php?msg=Data updated successfully!!");
-				}else{
-					header("Location:../authorlist.php?err=Data not updated!!");
+            }else{ 
+            	$exquery = "SELECT * FROM tbl_author WHERE name='$name' ";
+                $exdepart = $db->select($exquery);
+                if($exdepart != false){
+                	while($res = mysqli_fetch_assoc($exdepart)){
+					    $exid  = $res['id'] ;
+					}
+                }
+
+                if(isset($exid) && $exid != $id){
+            		header("Location:../editauthor.php?id=$id&err=Author already exist!!");
+                }else{   
+					$update ="UPDATE tbl_author 
+							SET
+							name               = '$name',
+							publication_status = '$publication_status'
+							WHERE id = '$id'
+							";
+					$run = $db->update($update);
+					if($run== true){
+						header("Location:../authorlist.php?msg=Data updated successfully!!");
+					}else{
+						header("Location:../authorlist.php?err=Data not updated!!");
+					}
 				}
             }
 

@@ -146,9 +146,9 @@
 								$value = mysqli_fetch_array($result);
 								$row   = mysqli_num_rows($result);
 								if($row > 0){
-									Session::set("login", true);
-									Session::set("email", $value['userEmail']);
-									Session::set("userId", $value['id']);
+									Session::set("librarylogin", true);
+									Session::set("libraryemail", $value['userEmail']);
+									Session::set("libraryuserId", $value['id']);
 									header("Location:./../index.php");
 								}else{
 									echo "<span style='color:red;font-size:18px'>Result not found!</span>";
@@ -186,7 +186,7 @@
 					<button type="submit" class="btn col-6 tomato" name="submit" >Log in</button>
 				  </div>
 				  <div class="form-group fgbutton  mb-0">
-					<a class="" href="password/forgetpass.php">Forget Password?</a>
+					<a class="" href="./../password/forgetpass.php">Forget Password?</a>
 					<a class="float-right" href="showbook.php">All Book List</a>
 				  </div>
 				</form>
